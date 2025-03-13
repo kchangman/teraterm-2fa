@@ -1,0 +1,19 @@
+
+【事前準備】
+python -m venv hoge ※この仮想環境名をconnect_host.ttlの「strconcat PYTHON_EXECUTABLE '\hoge\Scripts\python.exe'」のhogeの部分に入れる
+
+Set-ExecutionPolicy RemoteSigned -Scope Process
+hoge\Scripts\activate
+
+pip install pyotp
+
+【注意】
+スクリプト等が最後まで実行できなかったりした時に、「otp_output.txt」が消去されずに残ります。
+プロセスの権限の問題(たぶん)で次回実行時に書き込めなくなるので、その際は手動で削除してください。
+
+【改善したい】
+・generate_otp.pyで出力する認証コードをconnect_host.ttlで受け取る方法がわからない
+→.pyで一時テキストファイルを作成し、そこに認証コードを書き込み、.ttlで処理終了後に消す　で対応
+
+・複数ホスト対応したい
+　現状.ttlに引数を渡す方法がわからないため、ホストの数だけ.ttlを用意する必要がある

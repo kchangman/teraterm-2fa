@@ -1,0 +1,57 @@
+;==	===================================================================
+; 接続情報
+HOSTADDR = 'xx.xx.xx.xx'
+USERNAME = '<username>'
+PASSWORD = '<password>'
+;=====================================================================
+; スクリプトのフォルダパス
+PROJECT_PATH = 'C:\Users\user\xxxx'
+;=====================================================================
+
+PYTHON_EXECUTABLE = PROJECT_PATH
+strconcat PYTHON_EXECUTABLE '\hoge\Scripts\python.exe' ;hogeはvenvの仮想環境名
+
+SCRIPT_PATH = PROJECT_PATH
+strconcat SCRIPT_PATH '\generate_otp.py'
+
+OUTPUT_FILE = PROJECT_PATH
+strconcat OUTPUT_FILE '\otp_output.txt'
+
+; 二段階認証を取得するpythonスクリプトを実行するcommandを組み立て
+COMMAND_EXEC = '"'
+strconcat COMMAND_EXEC PYTHON_EXECUTABLE
+strconcat COMMAND_EXEC '" "'
+strconcat COMMAND_EXEC SCRIPT_PATH
+strconcat COMMAND_EXEC '" "'
+strconcat COMMAND_EXEC OUTPUT_FILE
+strconcat COMMAND_EXEC '"'
+
+; 接続コマンドオプション組立て
+COMMAND = HOSTADDR
+strconcat COMMAND ':22 /ssh /2 /auth=password /user='
+strconcat COMMAND USERNAME
+strconcat COMMAND ' /passwd='
+strconcat COMMAND PASSWORD
+
+; 接続
+connect COMMAND
+
+; 二段階認証コードを送信
+wait 'Verification code:'
+
+; Pythonスクリプトを実行して出力をファイルに出力
+exec COMMAND_EXEC
+pause 1
+; ファイルオープン
+fileopen fhandle OUTPUT_FILE 0
+; 一行読み込み
+filereadln fhandle TWOFA_CODE
+; ファイルクローズ
+fileclose fhandle
+pause 3
+
+sendln TWOFA_CODE
+
+filedelete OUTPUT_FILE
+
+end
