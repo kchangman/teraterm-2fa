@@ -1,16 +1,24 @@
-import pyotp
 import sys
+import pyotp
+import configparser
+import os
 
-OUTPUT_FILE = sys.argv[1]
+def read_config():
+    config = configparser.ConfigParser()
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(script_dir, 'config.ini')
+    config.read(config_path)
+    return config
 
-# 二段階認証のシークレットキー
-secret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+config = read_config()
+secret = config['auth']['secret']
 
 totp = pyotp.TOTP(secret)
 otp = totp.now()
 
+OUTPUT_FILE = sys.argv[1]
 with open(OUTPUT_FILE, 'w') as f:
     f.write(otp)
     f.flush()
 
-print(otp)
+#print(otp)

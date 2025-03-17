@@ -1,15 +1,9 @@
-;==	===================================================================
-; 接続情報
-HOSTADDR = 'xx.xx.xx.xx'
-USERNAME = '<username>'
-PASSWORD = '<password>'
-;=====================================================================
-; スクリプトのフォルダパス
-PROJECT_PATH = 'C:\Users\user\xxxx'
-;=====================================================================
+include 'config.ttl'
 
 PYTHON_EXECUTABLE = PROJECT_PATH
-strconcat PYTHON_EXECUTABLE '\hoge\Scripts\python.exe' ;hogeはvenvの仮想環境名
+strconcat PYTHON_EXECUTABLE '\'
+strconcat PYTHON_EXECUTABLE PYTHON_VENV
+strconcat PYTHON_EXECUTABLE '\Scripts\python.exe'
 
 SCRIPT_PATH = PROJECT_PATH
 strconcat SCRIPT_PATH '\generate_otp.py'
@@ -35,6 +29,7 @@ strconcat COMMAND PASSWORD
 
 ; 接続
 connect COMMAND
+pause 2
 
 ; 二段階認証コードを送信
 wait 'Verification code:'
@@ -48,10 +43,9 @@ fileopen fhandle OUTPUT_FILE 0
 filereadln fhandle TWOFA_CODE
 ; ファイルクローズ
 fileclose fhandle
-pause 3
+;pause 1
 
 sendln TWOFA_CODE
-
 filedelete OUTPUT_FILE
 
 end
