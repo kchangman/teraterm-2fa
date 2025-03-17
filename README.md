@@ -7,36 +7,36 @@
    ```bash
    git clone https://github.com/kchangman/teraterm-2fa.git
 
-2. ディレクトリに移動する
+2. **ディレクトリに移動する**
       ```bash
-   git clone https://github.com/kchangman/teraterm-2fa.git
+   cd teraterm-2fa
 
-3. 仮想環境を作成する
+3. **仮想環境を作成する**
    ```bash
    python -m venv hoge
    ```
    ※ 仮想環境名 `hoge` は任意の名前に変更可能ですが、  
-   必ず `config.ttl` 内のPYTHON_VENVを編集してください：
+   必ず `config.ttl` 内のPYTHON_VENVを仮想環境名に合わせて編集してください：
    ```plain
    PYTHON_VENV = 'hoge'
    ```
-   `hoge` の部分を仮想環境名に合わせて修正してください。
 
-4. 実行ポリシーを変更する
+4. **実行ポリシーを変更する**
    ```powershell
    Set-ExecutionPolicy RemoteSigned -Scope Process
    ```
 
-5. 仮想環境をアクティブ化する
+5. **仮想環境をアクティブ化する**
    ```powershell
    hoge\Scripts\activate
    ```
 
-6. 必要なパッケージをインストールする
+6. **必要なパッケージをインストールする**
    ```bash
    pip install pyotp
    ```
-7. configファイルを編集する
+
+7. **configファイルを編集する**
    プロジェクト内にある config.ini,config.ttl  ファイルを編集し、環境に合わせて設定を調整してください。
 ---
 
