@@ -1,0 +1,8 @@
+; スクリプトのフォルダパス
+PROJECT_PATH = 'C:\Users\user\teraterm-2fa'
+PYTHON_VENV = 'hoge'
+
+; 接続情報
+HOSTADDR = '10.10.10.10'
+USERNAME = 'username'
+PASSWORD = 'password'
