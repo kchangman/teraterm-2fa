@@ -20,6 +20,10 @@ strconcat COMMAND_EXEC '" "'
 strconcat COMMAND_EXEC OUTPUT_FILE
 strconcat COMMAND_EXEC '"'
 
+; OUTPUT_FILEが存在する場合は削除
+filesearch OUTPUT_FILE
+if result=1 filedelete OUTPUT_FILE
+
 ; 接続コマンドオプション組立て
 COMMAND = HOSTADDR
 strconcat COMMAND ':22 /ssh /2 /auth=password /user='
