@@ -1,3 +1,6 @@
+; 二段階認証のシークレットキー
+AUTH_SECRET = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+
 ; スクリプトのフォルダパス
 PROJECT_PATH = 'C:\Users\user\teraterm-2fa'
 PYTHON_VENV = 'hoge'

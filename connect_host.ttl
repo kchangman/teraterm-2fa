@@ -18,6 +18,8 @@ strconcat COMMAND_EXEC '" "'
 strconcat COMMAND_EXEC SCRIPT_PATH
 strconcat COMMAND_EXEC '" "'
 strconcat COMMAND_EXEC OUTPUT_FILE
+strconcat COMMAND_EXEC '" "'
+strconcat COMMAND_EXEC AUTH_SECRET
 strconcat COMMAND_EXEC '"'
 
 ; OUTPUT_FILEが存在する場合は削除
