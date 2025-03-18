@@ -37,14 +37,14 @@
    ```
 
 7. **configファイルを編集する**
-   プロジェクト内にある config.ini,config.ttl  ファイルを編集し、環境に合わせて設定を調整してください。
----
+   <br><br>プロジェクト内にある config.ini,config.ttl  ファイルを編集し、環境に合わせて設定を調整してください。
 
-## 注意事項
-
-- スクリプト等が最後まで正常に実行されなかった場合、`otp_output.txt` ファイルが残る場合があります。
-<br>この場合、**次回実行時にファイルへの書き込みができなくなる**可能性があります。
-<br>必ず手動で `otp_output.txt` を削除してください。
+## 実行
+   connect_host.ttlを実行してください。<br>
+   ttpmacro.exeで実行 or .ttlにttpmacro.exeを紐づけておくこと。
+   ```cmd
+   "C:\Program Files (x86)\teraterm5\ttpmacro.exe" "C:\Users\user\teraterm-2fa\connect_host.ttl"
+   ```
 
 ---
 
