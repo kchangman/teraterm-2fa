@@ -46,8 +46,9 @@
    "C:\Program Files (x86)\teraterm5\ttpmacro.exe" "C:\Users\user\teraterm-2fa\connect_host.ttl"
    ```
 
+## 注意事項
+- connect_host.ttlのstrconcat関数の文字列長の上限は511文字です。フォルダパスが長くならない位置にスクリプトを配置してください。
 ---
-
 ## 現状の課題と改善点
 
 ### 現状課題
