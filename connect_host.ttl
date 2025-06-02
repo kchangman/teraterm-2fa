@@ -9,7 +9,7 @@ SCRIPT_PATH = PROJECT_PATH
 strconcat SCRIPT_PATH '\generate_otp.py'
 
 OUTPUT_FILE = PROJECT_PATH
-strconcat OUTPUT_FILE '\otp_output.txt'
+strconcat OUTPUT_FILE '\otp_output'
 
 ; 二段階認証を取得するpythonスクリプトを実行するcommandを組み立て
 COMMAND_EXEC = '"'
@@ -32,6 +32,11 @@ strconcat COMMAND ':22 /ssh /2 /auth=password /user='
 strconcat COMMAND USERNAME
 strconcat COMMAND ' /passwd='
 strconcat COMMAND PASSWORD
+strlen PROXY
+if result>0 then
+  strconcat COMMAND ' /proxy='
+  strconcat COMMAND PROXY
+endif
 
 ; 接続
 connect COMMAND

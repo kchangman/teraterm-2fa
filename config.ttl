@@ -9,3 +9,6 @@ PYTHON_VENV = 'hoge'
 HOSTADDR = '10.10.10.10'
 USERNAME = 'username'
 PASSWORD = 'password'
+
+;プロキシ(不要な場合は空文字列 '' )
+PROXY = 'http://proxy.hoge.co.jp:3128'
