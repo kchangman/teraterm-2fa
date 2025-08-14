@@ -12,15 +12,15 @@ OUTPUT_FILE = PROJECT_PATH
 strconcat OUTPUT_FILE '\otp_output'
 
 ; 二段階認証を取得するpythonスクリプトを実行するcommandを組み立て
-COMMAND_EXEC = '"'
-strconcat COMMAND_EXEC PYTHON_EXECUTABLE
-strconcat COMMAND_EXEC '" "'
-strconcat COMMAND_EXEC SCRIPT_PATH
-strconcat COMMAND_EXEC '" "'
-strconcat COMMAND_EXEC OUTPUT_FILE
-strconcat COMMAND_EXEC '" "'
-strconcat COMMAND_EXEC AUTH_SECRET
-strconcat COMMAND_EXEC '"'
+COMMAND_PYTHON_GETOTP = '"'
+strconcat COMMAND_PYTHON_GETOTP PYTHON_EXECUTABLE
+strconcat COMMAND_PYTHON_GETOTP '" "'
+strconcat COMMAND_PYTHON_GETOTP SCRIPT_PATH
+strconcat COMMAND_PYTHON_GETOTP '" "'
+strconcat COMMAND_PYTHON_GETOTP OUTPUT_FILE
+strconcat COMMAND_PYTHON_GETOTP '" "'
+strconcat COMMAND_PYTHON_GETOTP AUTH_SECRET
+strconcat COMMAND_PYTHON_GETOTP '"'
 
 ; OUTPUT_FILEが存在する場合は削除
 filesearch OUTPUT_FILE
@@ -40,21 +40,23 @@ endif
 
 ; 接続
 connect COMMAND
-pause 2
 
-; 二段階認証コードを送信
-wait 'Verification code:'
+; Pythonスクリプトを実行してOTPをファイルに出力
+exec COMMAND_PYTHON_GETOTP
+; OTPファイルが作成されるまで待つ
+do
+  filesearch OUTPUT_FILE
+loop while result = 0
 
-; Pythonスクリプトを実行して出力をファイルに出力
-exec COMMAND_EXEC
-pause 1
 ; ファイルオープン
 fileopen fhandle OUTPUT_FILE 0
 ; 一行読み込み
 filereadln fhandle TWOFA_CODE
 ; ファイルクローズ
 fileclose fhandle
-;pause 1
+
+; 二段階認証コードを送信
+wait 'Verification code:'
 
 sendln TWOFA_CODE
 filedelete OUTPUT_FILE
