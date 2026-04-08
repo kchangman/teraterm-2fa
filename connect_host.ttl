@@ -38,9 +38,6 @@ if result>0 then
   strconcat COMMAND PROXY
 endif
 
-; 接続
-connect COMMAND
-
 ; Pythonスクリプトを実行してOTPをファイルに出力
 exec COMMAND_PYTHON_GETOTP
 ; OTPファイルが作成されるまで待つ
@@ -54,6 +51,9 @@ fileopen fhandle OUTPUT_FILE 0
 filereadln fhandle TWOFA_CODE
 ; ファイルクローズ
 fileclose fhandle
+
+; 接続
+connect COMMAND
 
 ; 二段階認証コードを送信
 wait 'Verification code:'
