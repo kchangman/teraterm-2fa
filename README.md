@@ -42,7 +42,7 @@ Teraterm 5.4
    ```
 
 7. **configファイルを編集する**
-   <br><br>プロジェクト内にある config.ttl  ファイルを編集し、環境に合わせて設定を調整してください。
+   <br><br>プロジェクト内にある config.ttl.sample を config.ttl にrenameして、  ファイル内容を環境に合わせて編集してください。
 
 ## 実行
    connect_host.ttlを実行してください。<br>
